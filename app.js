@@ -2,10 +2,9 @@ const express = require('express');
 const app = express();
 
 const bodyParser = require('body-parser');
-const expressValidator = require('express-validator');
 
 //Connect to db
-const { connect } = require('./database');
+const connect = require('./database');
 connect();
 
 //Handle Routes
@@ -14,8 +13,6 @@ const getRecurring = require('./src/controller/getRecurringTx');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-app.use(expressValidator());
 
 //middleware
 app.use((req, res, next) => {

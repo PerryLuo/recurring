@@ -14,30 +14,31 @@ const sortData = (dataArr) => {
   }
 
   //create an array of array of each user's tx
-  const dataArrByUser = [];
+  // const dataArrByUser = [];
   for (let user of uniqueUsers) {
-    dataArrByUser.push(
-      dataArr.filter((val) => {
-        return val.user_id === user;
-      })
-    );
+    // dataArrByUser.push(
+    dataArr.filter((val) => {
+      return val.user_id === user;
+    });
+    // );
   }
 
   //sort each array of user's tx in ascending by name, then by amount then by date
-  for (let sortedAmtThenDate of dataArrByUser) {
-    sortedAmtThenDate.sort(
-      firstBy((a, b) => {
+  dataArr.sort(
+    firstBy((a, b) => {
+      return a.user_id > b.user_id;
+    })
+      .thenBy((a, b) => {
         return a.name > b.name;
       })
-        .thenBy((a, b) => {
-          return a.amount - b.amount;
-        })
-        .thenBy((a, b) => {
-          return a.date - b.date;
-        })
-    );
-  }
+      .thenBy((a, b) => {
+        return a.amount - b.amount;
+      })
+      .thenBy((a, b) => {
+        return a.date - b.date;
+      })
+  );
 
-  return dataArrByUser;
+  return dataArr;
 };
 module.exports = sortData;

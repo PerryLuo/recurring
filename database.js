@@ -21,17 +21,4 @@ const connect = () => {
   });
 };
 
-const collectionExist = () => {
-  dbConnection.db
-    .listCollections({ name: 'usertxschemas' })
-    .next((err, collection) => {
-      console.log(collection);
-      if (collection) {
-        return true;
-      } else {
-        return false;
-      }
-    });
-};
-
-module.exports = { connect, collectionExist };
+module.exports = connect;
